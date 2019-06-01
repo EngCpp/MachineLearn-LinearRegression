@@ -17,7 +17,7 @@ public class Matrix {
         this.rows = data.length;
         this.cols = data[0].length;
         this.data = data;
-    }
+    }        
     
     public Matrix(Matrix m, Matrix n) {
         this.cols = m.cols + n.cols;
@@ -31,7 +31,7 @@ public class Matrix {
             for (int col2=0; col2<n.cols; col2++)
                 data[row][m.cols + col2] = n.get(row, col2);
         }        
-    }
+    }        
     
     public int rowsCount(){
         return rows;

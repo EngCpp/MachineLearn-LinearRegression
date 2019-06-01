@@ -51,9 +51,8 @@ public class LinearRegression {
         // Plot prediction =====================================================
         final Matrix prediction = new Matrix(data.getCol(0), X.multiply(theta));
         ChartUtils.plotToDataset(series, prediction);
-        ChartUtils.showChart(series, null, "Population of City in 10,000s", "Profit in $10,000s");
+        ChartUtils.showChart(series, "Linear Regression", "Population of City in 10,000s", "Profit in $10,000s");
     }
-
     
     private double computeCost(Matrix X, Matrix Y, Matrix theta) {
     // Number of training examples
@@ -65,8 +64,7 @@ public class LinearRegression {
        Matrix J = devT.multiply(dev).divide(2 * m);
        
        return J.get(0, 0);
-    }
-    
+    }    
     
     private Matrix gradientDescent(Matrix X, Matrix Y, Matrix theta, double alpha, int iterations) {
     // Number of training examples
@@ -85,28 +83,6 @@ public class LinearRegression {
             theta.setWith(0, 0, temp0);
             theta.setWith(1, 0, temp1);
         
-       }
-       
-       return theta;
-    }
-    
-    private Matrix gradientDescentNParams(Matrix X, Matrix Y, Matrix theta, double alpha, int iterations) {
-    // Number of training examples
-       final double m = Y.rowsCount();
-       
-       for (int i = 0; i < iterations; i++) {
-    
-            Matrix hT =  (( X.multiply(theta) ).subtract(Y)).transpose();
-            List<Double> tmp = new ArrayList();
-            
-            for (int param=0; param < theta.rowsCount(); param++) {
-                Matrix derivative = (hT.multiply(X.getCol(param))).divide(m);
-                
-                tmp.add(theta.get(param, 0) - alpha * derivative.get(0, 0));                
-            }
-            
-            for (int j=0; j < tmp.size(); j++)
-                theta.setWith(j, 0, tmp.get(j));            
        }
        
        return theta;
